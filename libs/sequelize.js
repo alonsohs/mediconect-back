@@ -15,12 +15,13 @@ if (config.isProd) {
       rejectUnauthorized: false
     }
   }
-
-  console.log('Test db url');
-  console.log(`postgres://${db.USERNAME}:${db.PASSWORD}@${db.HOSTNAME}:${db.PORT}/${db.DATABASE}`);
 }
 
-const sequelize = new Sequelize(config.dbUrl, options);
+const DB_URL = config.isProd ?
+  `postgres://${config.dbUsername}:${config.dbPassword}@${config.dbHost}:${config.dbPort}/${config.dbName}?sslmode=no-verify` :
+  config.dbUrl
+
+const sequelize = new Sequelize(DB_URL, options);
 
 setupModels(sequelize);
 

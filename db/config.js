@@ -6,7 +6,7 @@ module.exports = {
     dialect: 'postgres',
   },
   production: {
-    url: config.dbUrl,
+    url: `postgres://${config.dbUsername}:${config.dbPassword}@${config.dbHost}:${config.dbPort}/${config.dbName}?sslmode=no-verify`,
     dialect: 'postgres',
     dialectOptions: {
       ssl: {
