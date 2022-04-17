@@ -17,6 +17,7 @@ if (config.isProd) {
   }
 
   console.log(options);
+  console.log(config.dbUrl);
 }
 
 const sequelize = new Sequelize(config.dbUrl, options);
