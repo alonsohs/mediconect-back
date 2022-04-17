@@ -16,8 +16,8 @@ if (config.isProd) {
     }
   }
 
-  console.log(options);
-  console.log(config.dbUrl);
+  console.log('Test db url');
+  console.log(`postgres://${db.USERNAME}:${db.PASSWORD}@${db.HOSTNAME}:${db.PORT}/${db.DATABASE}`);
 }
 
 const sequelize = new Sequelize(config.dbUrl, options);
