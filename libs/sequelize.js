@@ -11,9 +11,12 @@ const options = {
 if (config.isProd) {
   options.dialectOptions = {
     ssl: {
+      require: true,
       rejectUnauthorized: false
     }
   }
+
+  console.log(options);
 }
 
 const sequelize = new Sequelize(config.dbUrl, options);
