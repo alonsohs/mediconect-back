@@ -7,30 +7,32 @@ class PatientService {
   constructor() {}
 
   async create(data) {
-    const hash = await bcrypt.hash(data.patient.password, 10);
+    const hash = await bcrypt.hash(data.user.password, 10);
     const newData = {
       ...data,
-      patient: {
-        ...data.patient,
+      curp: data.curp.toUpperCase(),
+      user: {
+        ...data.user,
+        role: "patient",
         password: hash
       }
     }
     const newPatient = await models.Patient.create(newData, {
-      include: ['patient']
+      include: ['user']
     });
-    delete newPatient.dataValues.patient.dataValues.password;
+    delete newPatient.dataValues.user.dataValues.password;
     return newPatient;
   }
 
   async find() {
     const rta = await models.Patient.findAll({
-      include: ['patient']
+      include: ['user']
     });
     return rta;
   }
 
   async findByRFID(rfid) {
-    const rta = await models.Patient.findOne({
+    const rta = await models.Patient.findAll({
       where: { rfid }
     });
     return rta;

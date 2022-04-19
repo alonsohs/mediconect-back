@@ -38,7 +38,7 @@ const PatientSchema = {
   },
   phone: {
     allowNull: true,
-    type: DataTypes.INTEGER
+    type: DataTypes.STRING
   },
   createdAt: {
     allowNull: false,
@@ -52,7 +52,7 @@ const PatientSchema = {
     defaultValue: true,
   },
   rfId: {
-    allowNull: false,
+    allowNull: true,
     type: DataTypes.STRING,
     unique: true
   },
@@ -67,6 +67,12 @@ const PatientSchema = {
     },
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
+  },
+  hasWristband: {
+    type: DataTypes.VIRTUAL,
+    get() {
+      return this.rfId !== null
+    }
   }
 }
 

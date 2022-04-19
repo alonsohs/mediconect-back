@@ -1,37 +1,44 @@
 const Joi = require('joi')
 
 const id = Joi.number().integer()
-const CURP = Joi.string().alphanum().min(18).max(18).uppercase()
+const curp = Joi.string().alphanum().min(18).max(18)
 const name = Joi.string()
 const fathers_lastname = Joi.string()
 const mothers_lastname = Joi.string()
 const date_of_birth = Joi.date().max('now')
-const gender = Joi.string().allow('Masculino', 'Femenino')
-const phone = Joi.number().integer().min(10).max(10)
+const gender = Joi.string().valid('Masculino', 'Femenino')
+const phone = Joi.string()
 const isActive = Joi.boolean()
-const rfid = Joi.string().alphanum()
+const rfId = Joi.string().alphanum()
+
+const email = Joi.string().email()
+const password =  Joi.string()
 
 
 const createPatientSchema = Joi.object({
-  CURP: CURP.required(),
+  curp: curp.required(),
   name: name.required(),
   fathers_lastname: fathers_lastname.required(),
   mothers_lastname: mothers_lastname.required(),
   date_of_birth: date_of_birth.required(),
   gender: gender.required(),
   phone,
-  rfid: rfid.required()
+  rfId: rfId.required(),
+  user: Joi.object({
+    email: email.required(),
+    password: password.required()
+  })
 })
 
 const updatePatientSchema = Joi.object({
-  CURP,
+  curp,
   name,
   fathers_lastname,
   mothers_lastname,
   date_of_birth,
   gender,
   phone,
-  rfid,
+  rfId,
   isActive
 })
 
