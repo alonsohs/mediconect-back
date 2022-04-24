@@ -29,7 +29,7 @@ router.get('/:id',
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      res.json(await service.findOne(id));
+      res.json(await service.findOnePatient(id));
     } catch (error) {
       next(error);
     }
