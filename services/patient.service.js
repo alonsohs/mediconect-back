@@ -31,14 +31,17 @@ class PatientService {
     return rta;
   }
 
-  async findByRFID(rfid) {
-    const rta = await models.Patient.findAll({
-      where: { rfid }
+  async findByRFID(rfId) {
+    const rta = await models.Patient.findOne({
+      where: { rfId }
     });
+    if (!rta) {
+      throw boom.notFound('Patient not found');
+    }
     return rta;
   }
 
-  async findOne(id) {
+  async findOnePatient(id) {
     const patient = await models.Patient.findByPk(id);
     if (!patient) {
       throw boom.notFound('Patient not found');
@@ -47,13 +50,13 @@ class PatientService {
   }
 
   async update(id, changes) {
-    const patient = await this.findOne(id);
+    const patient = await this.findOnePatient(id);
     const rta = await patient.update(changes);
     return rta;
   }
 
   async delete(id) {
-    const patient = await this.findOne(id);
+    const patient = await this.findOnePatient(id);
     await patient.destroy();
     return { id };
   }

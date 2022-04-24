@@ -35,6 +35,18 @@ router.get('/:id',
     }
 });
 
+router.get('/:rfid/rfid',
+  passport.authenticate('jwt', {session: false}),
+  checkRoles('admin', 'doctor'),
+  async (req, res, next) => {
+    try {
+      const { rfid } = req.params;
+      res.json(await service.findByRFID(rfid));
+    } catch (error) {
+      next(error);
+    }
+});
+
 router.post('/',
   passport.authenticate('jwt', {session: false}),
   checkRoles('admin', 'doctor'),
