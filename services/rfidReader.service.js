@@ -13,14 +13,15 @@ class RfidReaderService {
 
   async find() {
     const rta = await models.RfidReader.findAll({
-      include: ['rfidReader']
+      include: ['doctor']
     });
     return rta;
   }
 
-  async findByOwnerDoctorId(ownerDoctorId) {
+  async findByOwnerDoctorId(doctorId) {
     const rta = await models.RfidReader.findOne({
-      where: { ownerDoctorId }
+      where: { doctorId },
+      include: ['doctor']
     });
     if (!rta) {
       throw boom.notFound('RfidReader not found');
@@ -29,7 +30,9 @@ class RfidReaderService {
   }
 
   async findOne(id) {
-    const rfidReader = await models.RfidReader.findByPk(id);
+    const rfidReader = await models.RfidReader.findByPk(id, {
+      include: ['doctor']
+    });
     if (!rfidReader) {
       throw boom.notFound('RfidReader not found');
     }

@@ -39,7 +39,7 @@ class User extends Model {
     })
     this.hasOne(models.Doctor, {
       as: 'doctor',
-      foreignKey: 'doctorId'
+      foreignKey: 'userId'
     })
   }
 

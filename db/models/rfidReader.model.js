@@ -18,8 +18,8 @@ const RfidReaderSchema = {
     allowNull: false,
     type: DataTypes.STRING
   },
-  ownerDoctorId: {
-    field: 'owner_doctor_id',
+  doctorId: {
+    field: 'doctor_id',
     allowNull: false,
     type: DataTypes.INTEGER,
     references: {

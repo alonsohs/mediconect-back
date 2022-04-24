@@ -25,7 +25,7 @@ class DoctorService {
 
   async find() {
     const rta = await models.Doctor.findAll({
-      include: ['user']
+      include: ['rfid_reader']
     });
     return rta;
   }
@@ -41,7 +41,9 @@ class DoctorService {
   }
 
   async findOne(id) {
-    const doctor = await models.Doctor.findByPk(id);
+    const doctor = await models.Doctor.findByPk(id, {
+      include: ['rfid_reader']
+    });
     if (!doctor) {
       throw boom.notFound('Doctor not found');
     }

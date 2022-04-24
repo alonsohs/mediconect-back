@@ -73,7 +73,7 @@ class Doctor extends Model {
     this.belongsTo(models.User, {as: 'user'});
     this.hasOne(models.RfidReader, {
       as: 'rfid_reader',
-      foreignKey: 'ownerDoctorId'
+      foreignKey: 'doctorId'
     })
   }
 

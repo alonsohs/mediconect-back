@@ -35,7 +35,7 @@ router.get('/:id',
     }
   });
 
-router.get('/:ownerDoctorId/ownerDoctorId',
+router.get('/:ownerDoctorId/doctorId',
   passport.authenticate('jwt', {session: false}),
   checkRoles('admin', 'doctor'),
   async (req, res, next) => {

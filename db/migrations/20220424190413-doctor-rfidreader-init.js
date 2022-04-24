@@ -3,7 +3,6 @@
 const { DOCTOR_TABLE } = require('./../models/doctor.model');
 const { USER_TABLE } = require("../models/user.model");
 const { RFID_READER_TABLE } = require('../models/rfidReader.model')
-const {DataTypes, Sequelize} = require("sequelize");
 
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -12,48 +11,48 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER
+        type: Sequelize.DataTypes.INTEGER
       },
       professionalId: {
         allowNull: false,
         unique: true,
-        type: DataTypes.STRING
+        type: Sequelize.DataTypes.STRING
       },
       name: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: Sequelize.DataTypes.STRING
       },
       fathers_lastname: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: Sequelize.DataTypes.STRING
       },
       mothers_lastname: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: Sequelize.DataTypes.STRING
       },
       date_of_birth: {
         allowNull: false,
-        type: DataTypes.DATEONLY
+        type: Sequelize.DataTypes.DATEONLY
       },
       phone: {
         allowNull: true,
-        type: DataTypes.STRING
+        type: Sequelize.DataTypes.STRING
       },
       createdAt: {
         allowNull: false,
-        type: DataTypes.DATE,
+        type: Sequelize.DataTypes.DATE,
         field: 'created_at',
         defaultValue: Sequelize.NOW,
       },
       isActive: {
         allowNull: false,
-        type: DataTypes.BOOLEAN,
+        type: Sequelize.DataTypes.BOOLEAN,
         defaultValue: true,
       },
       userId: {
         field: 'user_id',
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: Sequelize.DataTypes.INTEGER,
         unique: true,
         references: {
           model: USER_TABLE,
@@ -69,20 +68,20 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER
+        type: Sequelize.DataTypes.INTEGER
       },
       name: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: Sequelize.DataTypes.STRING
       },
       locationName: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: Sequelize.DataTypes.STRING
       },
-      ownerDoctorId: {
-        field: 'owner_doctor_id',
+      doctorId: {
+        field: 'doctor_id',
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: Sequelize.DataTypes.INTEGER,
         references: {
           model: DOCTOR_TABLE,
           key: 'id'
@@ -92,12 +91,12 @@ module.exports = {
       },
       isActive: {
         allowNull: false,
-        type: DataTypes.BOOLEAN,
+        type: Sequelize.DataTypes.BOOLEAN,
         defaultValue: true,
       },
       createdAt: {
         allowNull: false,
-        type: DataTypes.DATE,
+        type: Sequelize.DataTypes.DATE,
         field: 'create_at',
         defaultValue: Sequelize.NOW
       }
