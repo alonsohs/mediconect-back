@@ -1,16 +1,16 @@
 const express = require('express')
 const passport = require('passport')
-const PatientService = require('../services/patient.service')
+const DoctorService = require('../services/doctor.service')
 const validationHandler = require('../middlewares/validator.handler')
 const {
-  createPatientSchema,
-  getPatientSchema,
-  updatePatientSchema,
-} = require('../schemas/patient.schema')
+  createDoctorSchema,
+  getDoctorSchema,
+  updateDoctorSchema
+} = require('../schemas/doctor.schema')
 const { checkRoles } = require("../middlewares/auth.handler");
 
 const router = express.Router()
-const service = new PatientService()
+const service = new DoctorService()
 
 router.get('/',
   passport.authenticate('jwt', {session: false}),
@@ -21,36 +21,36 @@ router.get('/',
     } catch (error) {
       next(error);
     }
-});
+  });
 
 router.get('/:id',
   passport.authenticate('jwt', {session: false}),
-  checkRoles('admin', 'doctor'),
+  checkRoles('admin', 'rfid_reader'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      res.json(await service.findOnePatient(id));
+      res.json(await service.findOne(id));
     } catch (error) {
       next(error);
     }
-});
+  });
 
-router.get('/:rfid/rfid',
+router.get('/:professionalId/professionalId',
   passport.authenticate('jwt', {session: false}),
-  checkRoles('admin', 'rfid_reader', 'doctor'),
+  checkRoles('admin', 'rfid_reader'),
   async (req, res, next) => {
     try {
-      const { rfid } = req.params;
-      res.json(await service.findByRFID(rfid));
+      const { professionalId } = req.params;
+      res.json(await service.findByProfessionalID(professionalId));
     } catch (error) {
       next(error);
     }
-});
+  });
 
 router.post('/',
   passport.authenticate('jwt', {session: false}),
-  checkRoles('admin', 'doctor'),
-  validationHandler(createPatientSchema, 'body'),
+  checkRoles('admin'),
+  validationHandler(createDoctorSchema, 'body'),
   async (req, res, next) => {
     try {
       const body = req.body;
@@ -63,9 +63,9 @@ router.post('/',
 
 router.patch('/:id',
   passport.authenticate('jwt', {session: false}),
-  checkRoles('admin', 'doctor'),
-  validationHandler(getPatientSchema, 'params'),
-  validationHandler(updatePatientSchema, 'body'),
+  checkRoles('admin'),
+  validationHandler(getDoctorSchema, 'params'),
+  validationHandler(updateDoctorSchema, 'body'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -79,8 +79,8 @@ router.patch('/:id',
 
 router.delete('/:id',
   passport.authenticate('jwt', {session: false}),
-  checkRoles('admin', 'doctor'),
-  validationHandler(getPatientSchema, 'params'),
+  checkRoles('admin'),
+  validationHandler(getDoctorSchema, 'params'),
   async (req, res, next) => {
     try {
       const { id } = req.params;

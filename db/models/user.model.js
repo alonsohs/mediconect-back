@@ -37,6 +37,10 @@ class User extends Model {
       as: 'patient',
       foreignKey: 'userId'
     })
+    this.hasOne(models.Doctor, {
+      as: 'doctor',
+      foreignKey: 'userId'
+    })
   }
 
   static config(sequelize) {
