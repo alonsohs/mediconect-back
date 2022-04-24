@@ -59,14 +59,20 @@ const DoctorSchema = {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
   },
+  hasRfidReader: {
+    type: DataTypes.VIRTUAL,
+    get() {
+      return this.rfid_reader !== null
+    }
+  }
 }
 
 class Doctor extends Model {
 
   static associate(models) {
     this.belongsTo(models.User, {as: 'user'});
-    this.hasMany(models.RfidReader, {
-      as: 'rfid_readers',
+    this.hasOne(models.RfidReader, {
+      as: 'rfid_reader',
       foreignKey: 'ownerDoctorId'
     })
   }
