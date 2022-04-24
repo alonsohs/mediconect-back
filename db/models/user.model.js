@@ -33,7 +33,10 @@ const UserSchema = {
 
 class User extends Model {
   static associate(models) {
-    // Associate to patient and doctor model
+    this.hasOne(models.Patient, {
+      as: 'patient',
+      foreignKey: 'userId'
+    })
   }
 
   static config(sequelize) {

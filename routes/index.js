@@ -2,6 +2,7 @@ const express = require('express');
 
 const usersRouter = require('./users.router');
 const authRouter = require('./auth.router');
+const patientsRouter = require('./patients.router')
 
 
 function routerApi(app) {
@@ -9,6 +10,7 @@ function routerApi(app) {
   app.use('/api/v1', router);
   router.use('/users', usersRouter);
   router.use('/auth', authRouter);
+  router.use('/patients', patientsRouter)
 }
 
 module.exports = routerApi;
