@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const routerApi = require('./routes');
+const path = require('path')
 const { checkApiKey } = require('./middlewares/auth.handler');
 
 const { logErrors, errorHandler, boomErrorHandler, ormErrorHandler } = require('./middlewares/error.handler');
@@ -19,7 +20,7 @@ app.use(cors(options));
 require('./utils/auth');
 
 app.get('/', (req, res) => {
-  res.send('Mediconect Express server');
+  res.sendFile(path.join(__dirname, '/index.html'))
 });
 
 routerApi(app);
