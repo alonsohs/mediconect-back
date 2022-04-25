@@ -80,6 +80,10 @@ class Patient extends Model {
 
   static associate(models) {
     this.belongsTo(models.User, {as: 'user'});
+    this.hasMany(models.RfidRead, {
+      as: 'rfid_reads',
+      foreignKey: 'patientId'
+    })
   }
 
   static config(sequelize) {
