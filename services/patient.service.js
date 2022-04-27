@@ -32,13 +32,13 @@ class PatientService {
   }
 
   async findByRFID(rfId) {
-    const rta = await models.Patient.findOne({
+    const patient = await models.Patient.findOne({
       where: { rfId }
     });
-    if (!rta) {
+    if (!patient) {
       throw boom.notFound('Patient not found');
     }
-    return rta;
+    return patient;
   }
 
   async findOnePatient(id) {

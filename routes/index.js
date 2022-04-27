@@ -16,7 +16,7 @@ function routerApi(app) {
   router.use('/patients', patientsRouter)
   router.use('/doctors', doctorRouter)
   router.use('/rfid-readers', rfidReaderRouter)
-  router.use('./rfid', rfidRouter)
+  router.use('/rfid', rfidRouter)
 }
 
 module.exports = routerApi;
