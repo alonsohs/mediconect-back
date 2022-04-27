@@ -45,6 +45,10 @@ const RfidReaderSchema = {
 class RfidReader extends Model {
   static associate(models) {
     this.belongsTo(models.Doctor, {as: 'doctor'});
+    this.hasOne(models.ReadingLog, {
+      as: 'reading_log',
+      foreignKey: 'rfidReaderId'
+    })
   }
 
   static config(sequelize) {

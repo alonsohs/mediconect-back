@@ -40,6 +40,17 @@ class DoctorService {
     return rta;
   }
 
+  async findByUserId(userId) {
+    const rta = await models.Doctor.findOne({
+      where: { userId },
+      include: ['rfid_reader']
+    });
+    if (!rta) {
+      throw boom.notFound('Doctor not found');
+    }
+    return rta;
+  }
+
   async findOne(id) {
     const doctor = await models.Doctor.findByPk(id, {
       include: ['rfid_reader']
