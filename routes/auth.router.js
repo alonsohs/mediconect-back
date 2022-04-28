@@ -57,6 +57,7 @@ router.post('/login/rfid-reader',
       const token = jwt.sign(payload, config.jwtSecret);
       res.json({
         rfid_reader: doctor.rfid_reader,
+        doctor: doctor,
         token
       });
     } catch (error) {
