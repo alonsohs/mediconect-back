@@ -24,7 +24,25 @@ class RfidReaderService {
       include: ['doctor']
     });
     if (!rta) {
-      throw boom.notFound('RfidReader not found');
+      throw boom.notFound('Rfid reader not found');
+    }
+    return rta;
+  }
+
+  async findByUserId(userId) {
+    const rta = await models.RfidReader.findOne({
+      where: {
+        '$doctor.user.id$': userId
+      },
+      include: [
+        {
+          association: 'doctor',
+          include: ['user']
+        }
+      ]
+    });
+    if (!rta) {
+      throw boom.notFound('Rfid reader not found');
     }
     return rta;
   }
@@ -34,7 +52,7 @@ class RfidReaderService {
       include: ['doctor']
     });
     if (!rfidReader) {
-      throw boom.notFound('RfidReader not found');
+      throw boom.notFound('Rfid reader not found');
     }
     return rfidReader;
   }
