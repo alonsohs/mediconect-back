@@ -49,6 +49,16 @@ class PatientService {
     return patient;
   }
 
+  async findByUserId(userId) {
+    const rta = await models.Patient.findOne({
+      where: { userId }
+    });
+    if (!rta) {
+      throw boom.notFound('Doctor not found');
+    }
+    return rta;
+  }
+
   async update(id, changes) {
     const patient = await this.findOnePatient(id);
     const rta = await patient.update(changes);
