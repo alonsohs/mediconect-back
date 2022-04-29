@@ -20,7 +20,9 @@ router.get('/me',
       const { role } = user
       let service = role === 'patient' ?  patientService : doctorService
       const profile = await service.findByUserId(user.sub)
-      res.json(profile)
+      res.json({
+        user: profile
+      })
     } catch (error) {
       next(error);
     }
