@@ -39,14 +39,14 @@ const RfidReaderSchema = {
     type: DataTypes.DATE,
     field: 'create_at',
     defaultValue: Sequelize.NOW
-  }
+  },
 }
 
 class RfidReader extends Model {
   static associate(models) {
     this.belongsTo(models.Doctor, {as: 'doctor'});
-    this.hasOne(models.ReadingLog, {
-      as: 'reading_log',
+    this.hasMany(models.RfidRead, {
+      as: 'readings_log',
       foreignKey: 'rfidReaderId'
     })
   }
