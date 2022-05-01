@@ -10,18 +10,6 @@ const ReadingLogSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER
   },
-  rfidReaderId: {
-    field: 'rfid_reader_id',
-    allowNull: false,
-    type: DataTypes.INTEGER,
-    unique: true,
-    references: {
-      model: RFID_READER_TABLE,
-      key: 'id'
-    },
-    onUpdate: 'CASCADE',
-    onDelete: 'SET NULL'
-  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,

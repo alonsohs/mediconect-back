@@ -25,7 +25,7 @@ class RfidReadService {
     }
     return rfidRead;
   }
-  
+
   async findOne(id) {
     const rfidRead = await models.RfidRead.findByPk(id);
     if (!rfidRead) {

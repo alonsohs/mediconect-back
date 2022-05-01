@@ -1,5 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { DOCTOR_TABLE } = require("./doctor.model");
+const {READING_LOG_TABLE} = require("./readingLog.model");
 
 const RFID_READER_TABLE = 'rfidReader';
 
@@ -39,14 +40,14 @@ const RfidReaderSchema = {
     type: DataTypes.DATE,
     field: 'create_at',
     defaultValue: Sequelize.NOW
-  }
+  },
 }
 
 class RfidReader extends Model {
   static associate(models) {
     this.belongsTo(models.Doctor, {as: 'doctor'});
-    this.hasOne(models.ReadingLog, {
-      as: 'reading_log',
+    this.hasMany(models.RfidRead, {
+      as: 'readings_log',
       foreignKey: 'rfidReaderId'
     })
   }

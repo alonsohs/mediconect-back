@@ -1,6 +1,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { READING_LOG_TABLE } = require("./readingLog.model");
 const { PATIENT_TABLE } = require("./patient.model");
+const {RFID_READER_TABLE} = require("./rfidReader.model");
 
 const RFID_READS_TABLE = 'rfid_reads';
 
@@ -26,12 +27,12 @@ const RfidReadSchema = {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
   },
-  readingLogId: {
-    field: 'reading_log_id',
+  rfidReaderId: {
+    field: 'rfid_reader_id',
     allowNull: false,
     type: DataTypes.INTEGER,
     references: {
-      model: READING_LOG_TABLE,
+      model: RFID_READER_TABLE,
       key: 'id'
     },
     onUpdate: 'CASCADE',
@@ -47,8 +48,8 @@ const RfidReadSchema = {
 
 class RfidRead extends Model {
   static associate(models) {
-    this.belongsTo(models.ReadingLog, {
-      as: 'reading_log'
+    this.belongsTo(models.RfidReader, {
+      as: 'rfid_reader'
     })
     this.belongsTo(models.Patient, {
       as: 'patient'
