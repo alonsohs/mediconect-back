@@ -1,6 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { DOCTOR_TABLE } = require("./doctor.model");
-const {READING_LOG_TABLE} = require("./readingLog.model");
 
 const RFID_READER_TABLE = 'rfidReader';
 
