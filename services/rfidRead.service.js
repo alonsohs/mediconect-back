@@ -14,14 +14,14 @@ class RfidReadService {
     return rta;
   }
 
-  async findByReadingLogId(readingLogId) {
+  async findByReaderId(rfidReaderId) {
     const rfidRead = await models.RfidRead.findAll({
       where: {
-        readingLogId
+        rfidReaderId
       },
     });
     if (!rfidRead) {
-      throw boom.notFound('Rfid read not found');
+      throw boom.notFound('Rfid reads not found');
     }
     return rfidRead;
   }
