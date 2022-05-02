@@ -55,6 +55,8 @@ io.on('connection', (socket) => {
   socket.on('connected', (rfidReaderId) => {
     socketUsers[rfidReaderId] = socket.id
     console.log(socketUsers)
+
+    io.to(socket.id).emit('connected_id', socket.id)
   })
 
   socket.on('disconnect', () => {

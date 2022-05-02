@@ -51,11 +51,13 @@ class PatientService {
 
   async findByUserId(userId) {
     const rta = await models.Patient.findOne({
-      where: { userId }
+      where: { userId },
+      include: ['user']
     });
     if (!rta) {
       throw boom.notFound('Doctor not found');
     }
+    delete rta.dataValues.user.dataValues.password;
     return rta;
   }
 

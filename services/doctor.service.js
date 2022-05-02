@@ -43,11 +43,13 @@ class DoctorService {
   async findByUserId(userId) {
     const rta = await models.Doctor.findOne({
       where: { userId },
-      include: ['rfid_reader']
+      include: ['rfid_reader', 'user']
     });
     if (!rta) {
       throw boom.notFound('Doctor not found');
     }
+
+    delete rta.dataValues.user.dataValues.password;
     return rta;
   }
 
