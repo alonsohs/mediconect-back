@@ -64,6 +64,13 @@ const DoctorSchema = {
     get() {
       return this.rfid_reader !== null
     }
+  },
+  fullName: {
+    field: 'full_name',
+    type:DataTypes.VIRTUAL,
+    get() {
+      return `${this.name} ${this.fathers_lastname} ${this.mothers_lastname}`;
+    }
   }
 }
 
