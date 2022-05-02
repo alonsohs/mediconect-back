@@ -5,7 +5,7 @@ const { Server } = require('socket.io')
 
 const routerApi = require('./routes');
 const path = require('path')
-const { checkApiKey, checkRoles} = require('./middlewares/auth.handler');
+const { checkRoles} = require('./middlewares/auth.handler');
 
 const { logErrors, errorHandler, boomErrorHandler, ormErrorHandler } = require('./middlewares/error.handler');
 
@@ -19,25 +19,18 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-
-const options = {
+app.use(express.urlencoded({ limit: '50mb', extended: true}))
+app.use(cors({
   origin: '*'
-}
-
-app.use(cors(options));
-
-require('./utils/auth');
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/index.html'))
-});
-
-routerApi(app);
-
+}));
 app.use(logErrors);
 app.use(ormErrorHandler);
 app.use(boomErrorHandler);
 app.use(errorHandler);
+
+require('./utils/auth');
+
+routerApi(app);
 
 // Init socket.io
 const server = http.createServer(app)
@@ -63,6 +56,10 @@ io.on('connection', (socket) => {
     console.log(`socket ${socket.id} disconnected`);
   })
 })
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '/index.html'))
+});
 
 // Reads endpoint route
 app.post('/api/v1/rfid/read',
