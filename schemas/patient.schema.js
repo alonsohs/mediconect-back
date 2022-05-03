@@ -8,6 +8,7 @@ const mothers_lastname = Joi.string()
 const date_of_birth = Joi.date().max('now')
 const gender = Joi.string().valid('Masculino', 'Femenino')
 const phone = Joi.string()
+const profileImage = Joi.string()
 const isActive = Joi.boolean()
 const rfId = Joi.string().alphanum()
 
@@ -23,6 +24,7 @@ const createPatientSchema = Joi.object({
   date_of_birth: date_of_birth.required(),
   gender: gender.required(),
   phone,
+  profileImage,
   rfId: rfId.required(),
   user: Joi.object({
     email: email.required(),
@@ -38,6 +40,7 @@ const updatePatientSchema = Joi.object({
   date_of_birth,
   gender,
   phone,
+  profileImage,
   rfId,
   isActive
 })

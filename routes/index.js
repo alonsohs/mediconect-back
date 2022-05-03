@@ -6,6 +6,7 @@ const patientsRouter = require('./patients.router')
 const doctorRouter = require('./doctor.router')
 const rfidReaderRouter = require('./rfidReader.router')
 const profileRouter = require('./profile.router')
+const uploadRouter = require('./upload.router')
 
 
 function routerApi(app) {
@@ -17,6 +18,7 @@ function routerApi(app) {
   router.use('/doctors', doctorRouter)
   router.use('/rfid-readers', rfidReaderRouter)
   router.use('/profile', profileRouter)
+  router.use('/upload', uploadRouter)
 }
 
 module.exports = routerApi;
