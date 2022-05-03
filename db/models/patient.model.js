@@ -56,6 +56,10 @@ const PatientSchema = {
     type: DataTypes.STRING,
     unique: true
   },
+  profileImage: {
+    allowNull: true,
+    type: DataTypes.STRING
+  },
   userId: {
     field: 'user_id',
     allowNull: false,
