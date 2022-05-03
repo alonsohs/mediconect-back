@@ -47,6 +47,10 @@ const DoctorSchema = {
     type: DataTypes.BOOLEAN,
     defaultValue: true,
   },
+  profileImage: {
+    allowNull: true,
+    type: DataTypes.STRING
+  },
   userId: {
     field: 'user_id',
     allowNull: false,

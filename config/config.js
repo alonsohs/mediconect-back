@@ -12,7 +12,10 @@ const config = {
   dbName: process.env.DB_NAME,
   apiKey: process.env.API_KEY,
   jwtSecret: process.env.JWT_SECRET,
-  clientUrl: process.env.CLIENT_URL
+  clientUrl: process.env.CLIENT_URL,
+  cloudinaryName: process.env.CLOUDINARY_NAME,
+  cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
+  cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET
 }
 
 module.exports = { config };
