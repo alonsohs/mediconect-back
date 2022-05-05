@@ -56,9 +56,17 @@ const PatientSchema = {
     type: DataTypes.STRING,
     unique: true
   },
+  bandColor: {
+    allowNull: true,
+    type: DataTypes.STRING,
+  },
   profileImage: {
     allowNull: true,
     type: DataTypes.STRING
+  },
+  address: {
+    type: DataTypes.STRING,
+    allowNull: true,
   },
   userId: {
     field: 'user_id',

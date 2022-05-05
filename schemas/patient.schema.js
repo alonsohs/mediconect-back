@@ -11,6 +11,8 @@ const phone = Joi.string()
 const profileImage = Joi.string()
 const isActive = Joi.boolean()
 const rfId = Joi.string().alphanum()
+const address = Joi.string()
+const bandColor = Joi.string()
 
 const email = Joi.string().email()
 const password =  Joi.string()
@@ -26,6 +28,8 @@ const createPatientSchema = Joi.object({
   phone,
   profileImage,
   rfId: rfId.required(),
+  address,
+  bandColor,
   user: Joi.object({
     email: email.required(),
     password: password.required()
@@ -42,6 +46,8 @@ const updatePatientSchema = Joi.object({
   phone,
   profileImage,
   rfId,
+  address,
+  bandColor,
   isActive
 })
 
