@@ -20,10 +20,8 @@ async function rfidReadPost(req, res, next, io, socketUsers) {
       rfidReaderId: sub,
     })
 
-    // Emit event to socket connection
-    if (sub in socketUsers) {
-      io.to(socketUsers[sub]).emit('rfid_read', patient.dataValues)
-    }
+    // Emit event to socket room connection
+    io.sockets.in(sub).emit('rfid_read', patient.dataValues)
 
     res.status(200).json({
       patient,

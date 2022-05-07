@@ -45,10 +45,8 @@ let socketUsers = {}
 io.on('connection', (socket) => {
   console.log('Connected')
 
-  socket.on('connected', (rfidReaderId) => {
-    socketUsers[rfidReaderId] = socket.id
-    console.log(socketUsers)
-
+  socket.on('createRoom', (rfidReaderId) => {
+    socket.join(rfidReaderId)
     io.to(socket.id).emit('connected_id', socket.id)
   })
 
