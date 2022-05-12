@@ -40,8 +40,6 @@ const io = new Server(server, {
   }
 })
 
-let socketUsers = {}
-
 io.on('connection', (socket) => {
   console.log('Connected')
 
@@ -65,7 +63,7 @@ app.post('/api/v1/rfid/read',
   checkRoles( 'rfid_reader'),
   validatorHandler(postRfidSchema, 'body'),
   async (req, res, next) => {
-    await rfidReadPost(req, res, next, io, socketUsers)
+    await rfidReadPost(req, res, next, io)
   }
 )
 

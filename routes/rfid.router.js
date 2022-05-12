@@ -1,10 +1,12 @@
 const PatientService = require('./../services/patient.service');
 const RfidReadService = require('./../services/rfidRead.service');
 
+const data = require('../db/data')
+
 const patientService = new PatientService();
 const rfidReadService = new RfidReadService()
 
-async function rfidReadPost(req, res, next, io, socketUsers) {
+async function rfidReadPost(req, res, next, io) {
   try {
     const user = req.user
     const { sub } = user
@@ -12,6 +14,13 @@ async function rfidReadPost(req, res, next, io, socketUsers) {
     const { rfId } = body
 
     const patient = await patientService.findByRFID(rfId)
+
+    const main_disease = data[patient?.dataValues?.bandColor]
+
+    const newPatient = {
+      ...patient.dataValues,
+      main_disease
+    }
 
     // Save to reading log
     const rfidRead = await rfidReadService.create({
@@ -21,7 +30,7 @@ async function rfidReadPost(req, res, next, io, socketUsers) {
     })
 
     // Emit event to socket room connection
-    io.sockets.in(sub).emit('rfid_read', patient.dataValues)
+    io.sockets.in(sub).emit('rfid_read', newPatient)
 
     res.status(200).json({
       patient,
